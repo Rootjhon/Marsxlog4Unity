@@ -9,6 +9,7 @@
 #if UNITY_ANDROID && !UNITY_EDITOR
 using System;
 using UnityEngine;
+using Unity.IL2CPP.CompilerServices;
 
 public partial class LogHook : ILogHandler
 {
@@ -23,6 +24,7 @@ public partial class LogHook : ILogHandler
         this.LogFormat(LogType.Exception, context, "{0}\n{1}", exception.Message, exception.StackTrace);
     }
 
+    [Il2CppSetOption(Option.ArrayBoundsChecks | Option.NullChecks, false)]
     public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args)
     {
         var IsMain = IsMainThread();
